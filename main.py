@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/remove')
+@app.route('/remove', methods=['POST','GET'])
 def remove():
     if request.method == 'POST':
         text = ""
