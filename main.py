@@ -8,11 +8,18 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/remove', methods=['POST'])
+@app.route('/remove')
 def remove():
     if request.method == 'POST':
-        text = request.form['text-input']
+        text = ""
+        try:
+            text = request.form['text-input']
+        except Exception as e:
+            text = "Error: " + str(e)
+            
         text = text.replace('\n', ' ')
         while '  ' in text:
             text = text.replace('  ', ' ')
         return render_template('index.html', text=text)
+    #if it is a GET request, then return the index page
+    return render_template('index.html')
